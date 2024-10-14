@@ -4,8 +4,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "mlx_linux/mlx.h"
+# include "mlx.h"
 # include <unistd.h>
+
+# define WIDTH 800
+# define HEIGHT 600
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 99
@@ -39,8 +42,6 @@ typedef struct s_cub
     int		F_COLOR;
     int		C_COLOR;
 
-	int		width;
-	int		height;
 
 	void	*mlx;
 	void	*mlx_win;

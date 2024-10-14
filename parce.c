@@ -43,7 +43,7 @@ int	color_to_int(char *color)
 		b = b * 10 + (color[i++] - '0');
 	if (color[i] != ',' && r >= 256)
 		return (-1);
-	return ((r<<16) + (g<<8) + b);
+	return ((r << 16) + (g << 8) + b);
 }
 
 int	get_color(char color, int fd)
@@ -104,24 +104,20 @@ char	**get_maps(int fd)
 	}
 	return (map);
 }
-
-void	height_width(t_cub *cub)
+void	fct(t_cub *cub)
 {
-	int		height;
-	int		width;
-	char	**maps;
+	int	i;
+	int	j;
 
-	maps = cub->maps;
-	height = 0;
-	width = 0;
-	while (maps[height])
+	i = -1;
+	while (cub->maps[++i])
 	{
-		if (ft_strlen(maps[height]) > width)
-			width = ft_strlen(maps[height]);
-		height++;
+		j = -1;
+		while (cub->maps[i][++j])
+			if (cub->maps[i][j] == 'N' || cub->maps[i][j] == 'S'
+				|| cub->maps[i][j] == 'W' || cub->maps[i][j] == 'E')
+				;
 	}
-	cub->height = height * TILE_SIZE;
-	cub->width = width * TILE_SIZE;
 }
 
 int	parce_cub(t_cub *cub, char *file_name)
@@ -134,13 +130,13 @@ int	parce_cub(t_cub *cub, char *file_name)
 	cub->texture_we = get_texture(fd, "WE");
 	cub->texture_ea = get_texture(fd, "EA");
 	cub->F_COLOR = get_color('F', fd);
-	cub->C_COLOR = get_color('C', fd);
+	cub->F_COLOR = get_color('C', fd);
 	cub->maps = get_maps(fd);
 	close(fd);
 	if (!cub->texture_no || !cub->texture_so || !cub->texture_we
 		|| !cub->texture_ea || cub->C_COLOR == -1 || cub->F_COLOR == -1)
 		return (1);
-	height_width(cub);
-	printf("%d %d\n", cub->height, cub->width);
+	
+	
 	return (0);
 }
