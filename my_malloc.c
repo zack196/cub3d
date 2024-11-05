@@ -1,35 +1,42 @@
 #include "cub3d.h"
 
-void	my_free(t_g_data **g_data)
+void	my_free(void)
 {
-	t_g_data	*tmp;
-
-	while (*g_data)
-	{
-		tmp = *g_data;
-		*g_data = (*g_data)->next;
-		free(tmp->data);
-		free(tmp);
-	}
+	my_malloc(2, 1);
 }
 
-void	*my_malloc(size_t size, int free_mode)
+void	destroy(t_gdata **g_data)
 {
-	static t_g_data	*g_data;
-	t_g_data		*new;
+	t_gdata	*data;
 
-	if (!free_mode)
+	data = *g_data;
+	while (g_data && *g_data)
 	{
-		new = malloc(sizeof (t_g_data));
+		data = (*g_data)->next;
+		free((*g_data)->data);
+		free(*g_data);
+		*g_data = data;
+	}
+	
+}
+
+void    *my_malloc(size_t size, int free_mode)
+{
+    static t_gdata	*g_data;
+    t_gdata			*new;
+
+    if (!free_mode)
+    {
+		new = malloc(sizeof (t_gdata));
 		if (!new)
-		    return (my_free(&g_data), exit(1), NULL);
+			return (destroy(&g_data), NULL);
 		new->data = malloc(size);
 		if (!new->data)
-		    return (my_free(&g_data), exit(1), NULL);
+			return (destroy(&g_data), NULL);
 		new->next = g_data;
+		g_data = new;
 		return (new->data);
-	}
+    }
 	else
-		return (my_free(&g_data), NULL);
+		return (destroy(&g_data), NULL);
 }
-

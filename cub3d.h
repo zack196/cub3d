@@ -1,69 +1,110 @@
-#ifndef CUB3D
-#define CUB3D 2
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "mlx.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <math.h>
+# include "mlx.h"
+# include <stdlib.h>
 
-#define TILE_SIZE 100
-#define WIDTH TILE_SIZE * 15
-#define HEIGHT TILE_SIZE * 5
+# define MAP_SCALE 0.3
+# define HEIGHT 800
+# define WIDTH 1600
+# define FOV_ANGLE M_PI / 3
 
-typedef struct s_g_data
+# define WALL_STRIP_WIDTH 1 // ta tchof had lblan
+# define NBR_RAYS WIDTH / WALL_STRIP_WIDTH
+
+
+typedef struct s_gdata
 {
     void			*data;
-    struct s_g_data	*next;
-}   t_g_data;
+    struct s_gdata	*next;
+}   t_gdata;
 
-typedef struct	s_image
-{
+void	*my_malloc(size_t size, int free_mode);
+void	my_free(void);
+
+typedef struct	s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_image;
-
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win_mlx;
-	t_image	image;
-}	t_mlx;
-
+}	t_data;
 
 typedef struct s_player
 {
-	int		player_x;
-	int		player_y;
+    int     x_player;
+    int     y_player;
+    float   rotation_angle;
 
-}	t_player;
+
+}   t_player;
+
+typedef struct s_ray
+{
+    int     ray_facing_up;
+    int     ray_facing_right;
+    
+    float   angle;
+    float   distance;
+}   t_ray;
 
 typedef struct s_cub
 {
+    //map parametres
     char		**map;
-	char		**mini_map;
-	int			map_height;
-	int			map_width;
-	t_player	*player;
+    int			map_width;
+    int			map_height;
+    int         floor_color;
+    int         ceiling_color;
+    //mini map
+    int			tile_size;
+    int			map_window_width;
+    int			map_window_height;
 
-	void	*mlx;
-	void	*win_mlx;
-	t_image	image;
+    //mlx
+    void		*mlx;
+    void		*mlx_win;
+    t_data		image;
+
+    t_player	*player;
+    t_ray       *rays;
+
 
 }   t_cub;
 
+size_t	ft_strlen(const char *str);
+char	*ft_strdup(const char *s1);
 
-void	*my_malloc(size_t size, int free_mode);
-char	*ft_strdup(char *str);
-int 	ft_strlen(char *str);
-void	get_player_position(t_cub *cub);
-int		mlx_handel(t_cub *cub);
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-int		check_player(char c);
-int		key_pres(int button, t_cub *cub);
-void	render_cub(t_cub *cub);
+//game initialisation
+void	sizing_map(t_cub *cub);
+void    player_init(t_cub *cub);
+
+//mlx
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+//render
+void    render_map(t_cub *cub);
+void	render_player(t_cub *cub);
+void    render_walls(t_cub *cub);
+
+//mlx event
+int pres_bouton(int keycode, t_cub *cub);
+int release_bouton(int keycode, t_cub *cub);
+
+//rays
+void    send_rays(t_cub *cub);
+void	render_rays(t_cub *cub);
+
+
+//utile
+int     is_wall(t_cub *cub, int x, int y);
+float   angle_normalize(float angle);
+void	update_player(t_cub *cub, int walk, int turn, int rotation);
 
 //tmp
-char    **generate_map();
+char	**tmp_map(t_cub *cub);
+void draw_line(t_data *img, int x_origin, int y_origin, int x_end, int y_end, int color);
 #endif
