@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
+/*   Updated: 2024/11/06 11:54:30 by zel-oirg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	update_player(t_data *data, int walk, int turn, int rotation)
@@ -9,12 +21,10 @@ void	update_player(t_data *data, int walk, int turn, int rotation)
 	x_new_pos = 0;
 	y_new_pos = 0;
 	player = data->player;
-	x_new_pos = player->player_coor.x + walk * 7 * MAP_SCALE
-        * sin(player->player_rotation)
-		+ turn * 7 * MAP_SCALE * cos(player->player_rotation);
-	y_new_pos = player->player_coor.y + walk * 7 * MAP_SCALE
-        * cos(player->player_rotation)
-		- turn * 7 * MAP_SCALE * sin(player->player_rotation);
+	x_new_pos = player->player_coor.x + walk * 3 * sin(player->player_rotation)
+		+ turn * 3 * cos(player->player_rotation);
+	y_new_pos = player->player_coor.y + walk * 3 * cos(player->player_rotation)
+		- turn * 3 * sin(player->player_rotation);
 	player->player_rotation = angle_normalize(((5 * M_PI / 180) * rotation)
 		+ player->player_rotation);
 	if (!is_wall(data, (int)x_new_pos, (int)y_new_pos))

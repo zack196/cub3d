@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 11:06:49 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:08:42 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,9 @@ int main(int ac, char **av)
     mlx_loop(data.mlx);
     return (0);
 }
-   
+/*
+./cub3d maps/good/square_map.cub 
+./cub3d maps/good/subject_map.cub
+./cub3d maps/good/works.cub
+./cub3d maps/good/test_whitespace.cub
+*/

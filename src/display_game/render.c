@@ -69,14 +69,17 @@ void	render_walls(t_data *data)
 	while (++y < data->win_width)
 	{
 		player_wall_distance = data->rays[y].distance * cos(data->rays[y].angle - data->player->player_rotation);
-		wall_height = (data->tile_size * ply_projection_plane) / player_wall_distance;//cub->rays[y].distance;
+		wall_height = (data->tile_size * ply_projection_plane) / player_wall_distance;//
 		x = -1;
 		while (++x < data->win_height)
 		{
 			if ((data->win_height - wall_height) / 2 > x)
 				my_mlx_pixel_put(&data->image, x, y, 0X1E90FF);
 			else if (x > (data->win_height + wall_height) / 2)
+			{
+				// if there is some changes to make for the texture it will be somethink in here!
 				my_mlx_pixel_put(&data->image, x, y, 0X8B4513);
+			}
 			else
 				my_mlx_pixel_put(&data->image, x, y, 0XA9A9A9);
 		}
@@ -87,8 +90,8 @@ int    render_game(t_data *data)
 {
 	render_walls(data);
 	render_map(data);
-	render_player(data);
 	render_rays(data);
+	render_player(data);
 	mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
 	return (0);
 }

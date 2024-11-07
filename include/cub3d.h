@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 11:22:19 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:35:14 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define MAP_SCALE 0.2
 # define HEIGHT 720
 # define WIDTH 1280
+# define TILE_SIZE 64
 
 typedef struct s_gdata
 {
@@ -62,6 +63,12 @@ typedef struct s_vector
 	int	x;
 	int	y;
 }	t_vector;
+
+typedef struct s_float_vector
+{
+	float	x;
+	float	y;
+}	t_float_vector;
 
 typedef struct s_map
 {
@@ -99,10 +106,12 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	float	angle;
-	float	distance;
-	int		ray_facing_right;
-	int		ray_facing_up;
+	float			angle;
+	float			distance;
+	int				ray_facing_right;
+	int				ray_facing_up;
+	int				is_hit_vertical;
+	t_float_vector	hit_coord;
 }	t_ray;
 
 typedef struct s_data
