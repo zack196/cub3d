@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/07 10:35:14 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/10 21:29:51 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@
 # define HEIGHT 720
 # define WIDTH 1280
 # define TILE_SIZE 64
+
+
+typedef struct s_texture
+{
+    void    *img;           // Pointer to the texture image
+    int     width;          // Width of the texture
+    int     height;         // Height of the texture
+    int     bits_per_pixel; // Bits per pixel for the texture
+    int     line_length;    // Line length for the texture
+    int     endian;         // Endianess for the texture
+    char    *addr;          // Pointer to the texture's data
+}               t_texture;
 
 typedef struct s_gdata
 {
@@ -120,7 +132,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*win_ptr;
 	t_image		image;
-	
+	t_texture   textures[4];
     int         ac;
     char        **av;
 	int			win_height;
@@ -187,4 +199,9 @@ void    send_rays(t_data *data);
 
 
 void	render_map(t_data *data);
+
+//texters
+void    load_textures(t_data *data);
+int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
+void    render_textured_wall(t_data *data, int column, float distance, float wall_height);
 #endif
