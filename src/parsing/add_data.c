@@ -6,7 +6,7 @@
 /*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:11:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/13 18:17:45 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:44:34 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void    ft_add_textures(t_data *data)
 	printf("South texture path: %s\n", data->carte.south_texture);
 	printf("West texture path: %s\n", data->carte.west_texture);
 	printf("East texture path: %s\n", data->carte.east_texture);
-    if (open(data->carte.north_texture, O_RDONLY) < 0
-		|| open(data->carte.south_texture, O_RDONLY) < 0
-		|| open(data->carte.east_texture, O_RDONLY) < 0
-		|| open(data->carte.west_texture, O_RDONLY) < 0)
-		print_error("", "Erorr in open textures", 1);
+    // if (open(data->carte.north_texture, O_RDONLY) < 0
+	// 	|| open(data->carte.south_texture, O_RDONLY) < 0
+	// 	|| open(data->carte.east_texture, O_RDONLY) < 0
+	// 	|| open(data->carte.west_texture, O_RDONLY) < 0)
+	// 	print_error("", "Erorr in open textures", 1);
 }
 static void ft_type_colors(t_color *col, char **colors)
 {
