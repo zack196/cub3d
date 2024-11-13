@@ -6,7 +6,7 @@
 /*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/10 21:34:28 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/11 14:53:53 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int get_texture_color(t_data *data, t_ray *ray, int x, int y)
     return color;
 }
 
-
 // Function to render the walls with the textures
 void render_textured_wall(t_data *data, int column, float distance, float wall_height)
 {
@@ -74,7 +73,6 @@ void render_textured_wall(t_data *data, int column, float distance, float wall_h
     {
         // Determine texture coordinate and color for the wall pixel
         tex_color = get_texture_color(data, &data->rays[column], column, y);
-
         // Draw the pixel
         my_mlx_pixel_put(&data->image, column, y, tex_color);
         y++;

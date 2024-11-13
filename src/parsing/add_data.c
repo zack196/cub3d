@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:11:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 01:13:52 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:05:07 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void    ft_add_textures(t_data *data)
             data->carte.east_texture = ft_strdup(texter[1]);
         ft_spl_free(texter);
     }
-    // if (open(data->carte.north_texture, O_RDONLY) < 0
-	// 	|| open(data->carte.south_texture, O_RDONLY) < 0
-	// 	|| open(data->carte.east_texture, O_RDONLY) < 0
-	// 	|| open(data->carte.west_texture, O_RDONLY) < 0)
-	// 	print_error("", "Erorr in open textures", 1);
+    if (open(data->carte.north_texture, O_RDONLY) < 0
+		|| open(data->carte.south_texture, O_RDONLY) < 0
+		|| open(data->carte.east_texture, O_RDONLY) < 0
+		|| open(data->carte.west_texture, O_RDONLY) < 0)
+		print_error("", "Erorr in open textures", 1);
 }
 static void ft_type_colors(t_color *col, char **colors)
 {
