@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 12:08:42 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:21:10 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,12 @@ int main(int ac, char **av)
     //printf("%s", data.carte.filename);
     //ft_pars_file(*av);
     ft_parsing(&data);
+    printf("%s\n", data.carte.north_texture);
+    printf("%s\n", data.carte.west_texture);
+    printf("%s\n", data.carte.east_texture);
+    printf("%s\n", data.carte.south_texture);
     
-    // begin the display
+    
     if (display_game(&data))
         return (clear_all(&data), 1);
     

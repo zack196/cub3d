@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:05:45 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 01:46:40 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:06:10 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void	my_free(void);
 //get_next_line
 char	*ft_join(char *s1, char *s2);
 int	chec_new_line(char *s);
+char **ft_normal_split(char  *s, char c);
 #endif

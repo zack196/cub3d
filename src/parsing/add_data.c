@@ -6,7 +6,7 @@
 /*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:11:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/13 12:05:07 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:17:45 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,25 @@ void    ft_add_textures(t_data *data)
     char    **texter;
     int     i;
     
-    i = -1;
-    while (data->map[++i])
+    i = 0;
+    while (data->map[i])
     {
-        texter = ft_split(data->map[i], ", \n");
-        if (texter[0] == NULL)
-            return ;
-        if (ft_strcmp(texter[0], NORTH_TEXTURE) == 0)
+		
+        texter = ft_split(data->map[i++], ", \n");
+        if (texter[0] && (ft_strcmp(texter[0], NORTH_TEXTURE) == 0))
             data->carte.north_texture = ft_strdup(texter[1]);
-        else if (ft_strcmp(texter[0], SOUTH_TEXTURE) == 0)
+        else if (texter[0] && (ft_strcmp(texter[0], SOUTH_TEXTURE) == 0))
             data->carte.south_texture = ft_strdup (texter[1]);
-        else if (ft_strcmp(texter[0], WEST_TEXTURE) == 0)
+        else if (texter[0] && (ft_strcmp(texter[0], WEST_TEXTURE) == 0))
             data->carte.west_texture = ft_strdup(texter[1]);
-        else if (ft_strcmp(texter[0], EAST_TEXTURE) == 0)
+        else if ( texter[0] && (ft_strcmp(texter[0], EAST_TEXTURE) == 0))
             data->carte.east_texture = ft_strdup(texter[1]);
         ft_spl_free(texter);
     }
+	printf("North texture path: %s\n", data->carte.north_texture);
+	printf("South texture path: %s\n", data->carte.south_texture);
+	printf("West texture path: %s\n", data->carte.west_texture);
+	printf("East texture path: %s\n", data->carte.east_texture);
     if (open(data->carte.north_texture, O_RDONLY) < 0
 		|| open(data->carte.south_texture, O_RDONLY) < 0
 		|| open(data->carte.east_texture, O_RDONLY) < 0
