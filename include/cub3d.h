@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/10 21:29:51 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/16 01:03:33 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 # define EAST_TEXTURE "EA"
 # define WEST_TEXTURE "WE"
 
-# define MAP_SCALE 0.2
-# define HEIGHT 720
-# define WIDTH 1280
-# define TILE_SIZE 64
-
+# define MAP_SCALE 1
+// # define HEIGHT 720
+// # define WIDTH 1280
+#define STEP 15
+#define ROTATION_STEP 10
 
 typedef struct s_texture
 {
@@ -93,8 +93,10 @@ typedef struct s_map
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
+	
 	t_color		floor_color;
 	t_color		ceilling_color;
+	
 	char		starting_derection;
 	int			index_end_of_map;
 	char		**cub;
@@ -137,11 +139,10 @@ typedef struct s_data
     char        **av;
 	int			win_height;
 	int			win_width;
-	//mini_map
-	int			mini_map_window_height;
-	int			mini_map_window_width;
+	//map
+	int			map_height;
+	int			map_width;
 	int			tile_size;
-	
 	t_map	    carte;
 	char		**map;
 	//player data
@@ -151,11 +152,15 @@ typedef struct s_data
 	int			nbr_rays;
 	t_ray		*rays;
 	float		fov_angle;
-	
+	///////////////////
+	//a remplir
+	unsigned int	ceiling_color;
+	unsigned int	floor_color;
+	///////////////////
 }	t_data;
 
 // *** parsing ***:
-int main(int ac, char **av);
+int 	main(int ac, char **av);
 int		print_error(char *arg, char *str, int fd);
 int		ft_pars_file(char *arg);
 void	ft_pars_map(t_data *data);
@@ -167,9 +172,9 @@ int		ft_len_map(t_data  *data);
 int		ft_find_newline(char *str);
 int		ft_find_char(char x, char *str);
 void    ft_find_player_pos(t_map *map);
-int ft_pars_wall(char **cub, int row);
-int ft_surrond_wall(char **cub, int row, int col);
-int	ft_check_wall(char **cub, int row, int col);
+int 	ft_pars_wall(char **cub, int row);
+int 	ft_surrond_wall(char **cub, int row, int col);
+int		ft_check_wall(char **cub, int row, int col);
 void    ft_last_pars_cub(t_map map);
 void	ft_check_cub(t_map map, int row, int col);
 void	ft_take_cub(t_data *data);
@@ -177,7 +182,7 @@ void    ft_pars_cub(char **cub ,t_data *data);
 void	ft_init_game(t_data *data);
 void	ft_init_carte(t_map *map);
 void	init_color(t_color *color);
-int	ft_find_cub_(char *src, char *to_find);
+int		ft_find_cub_(char *src, char *to_find);
 
 //mlx event
 int pres_bouton(int keycode, t_data *cub);
@@ -192,16 +197,18 @@ int 	is_wall(t_data *data, int x, int y);
 float	init_player_rotation(t_data *data);
 void 	draw_line(t_image *img, t_vector origine, t_vector end, int color);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+float	distance(t_vector a, t_float_vector b);
+int		mini_wall(t_data *data, int x, int y, int tile_size);
 //rays
 void    send_rays(t_data *data);
 
 
 
-
+int	clear_all(t_data *data);
 void	render_map(t_data *data);
 
 //texters
 void    load_textures(t_data *data);
-int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
-void    render_textured_wall(t_data *data, int column, float distance, float wall_height);
+// int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
+void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_height);
 #endif

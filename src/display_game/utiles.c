@@ -16,7 +16,10 @@ int is_wall(t_data *data, int x, int y)
 
     x_map_coor = x / data->tile_size;
     y_map_coor = y / data->tile_size;
-    if (data->carte.cub[x_map_coor][y_map_coor] == '1')
+    if (y_map_coor >= ft_strlen(data->carte.cub[x_map_coor])
+        || x_map_coor >= data->carte.row)
+        return (1);
+    if (!ft_strchr("0NEWS", data->carte.cub[x_map_coor][y_map_coor]))
         return (1);
     return (0);
 }
