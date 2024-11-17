@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/16 01:04:11 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:45:59 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	main(int ac, char **av)
 	ft_init_game(&data);
 	data.carte.filename = ft_strdup(av[1]);
 	ft_parsing(&data);
-	
 	if (display_game(&data))
 		return (clear_all(&data), 1);
 	// initialize some constant for the display of mini map

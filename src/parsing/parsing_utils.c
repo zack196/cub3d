@@ -6,7 +6,7 @@
 /*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:59:27 by hel-band          #+#    #+#             */
-/*   Updated: 2024/10/18 12:04:40 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:23:23 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	ft_len_map(t_data  *data)
 	size = 0;
 	while (data->map[i])
 	{
-		if (data->map[i][0] == '1'
-				|| data->map[i][0] == ' '
-				|| data->map[i][0] == '0')
+		char *line = ft_strtrim(data->map[i], " ");
+		if (line[0] == '1' || line[0] == '0')
 		{
 			size++;
 		}
