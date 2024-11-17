@@ -6,7 +6,11 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:59:27 by hel-band          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/17 16:30:22 by zel-oirg         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/17 16:23:23 by hel-band         ###   ########.fr       */
+>>>>>>> 7ca3eb740325d93a0c35c2e7722fcc9924235d3a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +35,8 @@ int	ft_len_map(t_data  *data)
 	size = 0;
 	while (data->map[i])
 	{
-		if (data->map[i][0] == '1'
-				|| data->map[i][0] == ' '
-				|| data->map[i][0] == '0')
+		char *line = ft_strtrim(data->map[i], " ");
+		if (line[0] == '1' || line[0] == '0')
 		{
 			size++;
 		}
