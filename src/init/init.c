@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:42:45 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/06 06:05:40 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:27:29 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ void	ft_init_carte(t_map *map)
 }
 void	ft_init_game(t_data *data)
 {
+		int	i;
 	ft_init_carte(&data->carte);
+	//mlx init
 	data->mlx = NULL;
 	data->win_ptr = NULL;
+	data->image.img = NULL;
+	i = -1;
+	while (++i < 4)
+		data->textures[i].img = NULL;
 }

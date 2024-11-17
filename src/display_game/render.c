@@ -87,6 +87,7 @@ void	render_walls(t_data *data)
 
 int    render_game(t_data *data)
 {
+	// mlx_clear_window(data->mlx, data->win_ptr);
 	render_walls(data);
 	// render_map(data);
 	// render_rays(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:17:53 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/13 18:18:27 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:28:11 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int ft_get_number_line(char *av)
     while (line != NULL)
     {
         number_lines++;
-        free(line);
+        // free(line);
         line = get_next_line(fd);
     }
     close(fd);

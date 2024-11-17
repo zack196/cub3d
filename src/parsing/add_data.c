@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:11:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/14 14:06:08 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:37:28 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    ft_add_textures(t_data *data)
             data->carte.west_texture = ft_strdup(texter[1]);
         else if ( texter[0] && (ft_strcmp(texter[0], EAST_TEXTURE) == 0))
             data->carte.east_texture = ft_strdup(texter[1]);
-        ft_spl_free(texter);
+        // ft_spl_free(texter);
     }
 	// printf("North texture path: %s\n", data->carte.north_texture);
 	// printf("South texture path: %s\n", data->carte.south_texture);
@@ -85,7 +85,7 @@ void    ft_add_colors(t_data *data)
 				ft_type_colors(&data->carte.ceilling_color, colors + 1);
         }
         i++;
-        ft_spl_free(colors);
+        // ft_spl_free(colors);
     }
 }
 
@@ -120,7 +120,7 @@ void	ft_take_cub(t_data *data)
 		if (data->map[i][0] == '1'
 				|| data->map[i][0] == '0')
 		{
-			data->carte.cub[j++] = strndup(data->map[i],//don t forget to impliment your own
+			data->carte.cub[j++] = ft_strndup(data->map[i],
 					ft_strlen(data->map[i]) - \
 					ft_find_newline(data->map[i]));
 			if (data->carte.col < (int)ft_strlen(data->carte.cub[j - 1]))

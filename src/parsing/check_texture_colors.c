@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture_colors.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:13:29 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/13 18:19:00 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:28:06 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void ft_pars_texture(t_data *data, int *ptr)
         else if (ft_strncmp(line, "F ", 2) == 0 ||
             ft_strncmp(line, "C ", 2) == 0)
             color++;
-        free(line);
+        // free(line);
         (*ptr)++;
     }
 

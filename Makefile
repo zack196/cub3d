@@ -1,7 +1,7 @@
 EXEC_DIR        =   src/parsing/
 INIT_DIR		=	src/init/
 RAY_CASTING		=	src/display_game/
-CFLAGS          =   -Wall -Wextra -Werror -fsanitize=address
+CFLAGS          =   -Wall -Wextra -Werror #-fsanitize=address
 NAME            =   cub3d
 LIBFT_DIR       =   libft
 LIBFT           =   $(LIBFT_DIR)/libft.a

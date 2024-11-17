@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/16 01:04:11 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:08:03 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,22 @@ void	ft_parsing(t_data *data)
 	ft_pars_cub(data->carte.cub, data);
 	ft_last_pars_cub(data->carte);
 }
+void	init_mlx(t_data *data)
+{
+	int	i;
 
+	data->mlx = NULL;
+	data->win_ptr = NULL;
+	data->image.img = NULL;
+	i = -1;
+	while (++i < 4)
+		data->textures[i].img = NULL;
+}
 int	display_game(t_data *data)
 {
 	data->win_width = 1700;
 	data->win_height = 1350;
+	init_mlx(data);
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (1);
@@ -41,36 +52,49 @@ int	display_game(t_data *data)
 		, data->win_height);
 	if (!data->image.img)
 		return (1); // Return error if image creation fail
-	data->image.addr = mlx_get_data_addr(data->image.img,
-		&data->image.bits_per_pixel, &data->image.line_length
+	data->image.addr = mlx_get_data_addr(data->image.img
+		,&data->image.bits_per_pixel, &data->image.line_length
 		, &data->image.endian);
 	if (!data->image.addr)
-		return (1); // Return error if data address retrieval fails
-	load_textures(data);
+		return (1);
+	if (load_textures(data))
+		return (1);
 	mlx_hook(data->win_ptr, 2, (1L<<0), pres_bouton, data);
 	mlx_hook(data->win_ptr, 3, (1L<<1), release_bouton, data);
 	mlx_hook(data->win_ptr, 17, 0L, clear_all, data);
 	return (0);
 }
 
-int clear_all(t_data *data)
+int	clear_all(t_data *data)
 {
-    if (data->image.img)
-        mlx_destroy_image(data->mlx, data->image.img);
-    if (data->win_ptr)
-        mlx_destroy_window(data->mlx, data->win_ptr);
-    if (data->mlx)
-        free(data->mlx);
+	int	i;
+	
+	i = -1;
+	while (++i < 4)
+	if (data->textures[i].img)
+	{
+		mlx_destroy_image(data->mlx, data->textures[i].img);
+		data->textures[i].img = NULL;
+	}
+	if (data->image.img)
+	{
+		mlx_destroy_image(data->mlx, data->image.img);
+		data->image.img = NULL;
+	}
+	if (data->win_ptr)
+	{
+		mlx_destroy_window(data->mlx, data->win_ptr);
+		data->win_ptr = NULL;
+	}
 	my_free();
-    exit(0);
-    return (0);
+	exit(0);
+	return (0);
 }
+
 
 void	init_game(t_data *data)
 {
 	// initialize some constant for the display of mini map
-	// data->tile_size = (int)(fminf((float)data->win_width / data->carte.col
-	// 	, (float)data->win_height / data->carte.row) * MAP_SCALE);
 	data->tile_size = 64;
 	data->map_height = data->carte.row * data->tile_size;
 	data->map_width = data->carte.col * data->tile_size;
@@ -87,17 +111,18 @@ void	init_game(t_data *data)
 	data->rays = my_malloc(sizeof (t_ray) * data->nbr_rays, 0);
 	send_rays(data);
 }
-
+void	f()
+{system("leaks cub");}
 int	main(int ac, char **av)
 {
 	t_data	data;
 
+	atexit(f);
 	if (ac != 2)
 		print_error(*av, "numberd argument not valid\n", 1);
 	ft_init_game(&data);
 	data.carte.filename = ft_strdup(av[1]);
 	ft_parsing(&data);
-	
 	if (display_game(&data))
 		return (clear_all(&data), 1);
 	// initialize some constant for the display of mini map

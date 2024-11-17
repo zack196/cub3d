@@ -6,40 +6,36 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/15 19:45:25 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:41:42 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/cub3d.h"
 
-void load_textures(t_data *data)
+int load_textures(t_data *data)
 {
-    data->textures[0].img = mlx_xpm_file_to_image(data->mlx
-		, data->carte.north_texture
-		, &data->textures[0].width, &data->textures[0].height);
-    data->textures[1].img = mlx_xpm_file_to_image(data->mlx
-		, data->carte.south_texture, &data->textures[1].width
-		, &data->textures[1].height);
-    data->textures[2].img = mlx_xpm_file_to_image(data->mlx
-		, data->carte.east_texture, &data->textures[2].width
-		, &data->textures[2].height);
-    data->textures[3].img = mlx_xpm_file_to_image(data->mlx
-		, data->carte.west_texture, &data->textures[3].width
-		, &data->textures[3].height);
-    // Extract texture data from the image
-    data->textures[0].addr = mlx_get_data_addr(data->textures[0].img
-		, &data->textures[0].bits_per_pixel, &data->textures[0].line_length 
-		, &data->textures[0].endian);
-    data->textures[1].addr = mlx_get_data_addr(data->textures[1].img
-		, &data->textures[1].bits_per_pixel, &data->textures[1].line_length
-		, &data->textures[1].endian);
-    data->textures[2].addr = mlx_get_data_addr(data->textures[2].img
-		, &data->textures[2].bits_per_pixel, &data->textures[2].line_length
-		, &data->textures[2].endian);
-    data->textures[3].addr = mlx_get_data_addr(data->textures[3].img
-		, &data->textures[3].bits_per_pixel, &data->textures[3].line_length
-		, &data->textures[3].endian);
+	int	i;
+
+	data->textures[0].tex_name = data->carte.north_texture;
+	data->textures[1].tex_name = data->carte.south_texture;
+	data->textures[2].tex_name = data->carte.east_texture;
+	data->textures[3].tex_name = data->carte.west_texture;
+	i = -1;
+	while (++i < 4)
+	{
+		data->textures[i].img = mlx_xpm_file_to_image(data->mlx
+			, data->textures[i].tex_name
+			, &data->textures[i].width, &data->textures[i].height);
+		if (!data->textures[i].img)
+			return (1);
+		data->textures[i].addr = mlx_get_data_addr(data->textures[i].img
+			, &data->textures[i].bits_per_pixel, &data->textures[i].line_length
+			, &data->textures[i].endian);
+		if (!data->textures[i].addr)
+			return (1);
+	}
+	return (0);
 }
 
 int get_texture_color(t_texture *tex, int tex_x, int tex_y)
@@ -75,7 +71,8 @@ void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_hei
 		tex_y = (int)ray->hit_coord.x % data->tile_size;
 	if ((x - (data->win_height - wall_height) / 2) < 0)
 		x = (data->win_height - wall_height) / 2;
-	tex_x = (int)((x - (data->win_height - wall_height) / 2) * ((float) data->tile_size / wall_height)) % data->tile_size;
+	tex_x = (int)((x - (data->win_height - wall_height) / 2)
+		* ((float) data->tile_size / wall_height)) % data->tile_size;
 	color = get_texture_color(tex, tex_x, tex_y);
 	my_mlx_pixel_put(&data->image, x, y, color);
 }

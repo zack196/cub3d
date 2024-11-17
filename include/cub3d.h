@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/16 01:03:33 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:46:07 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 typedef struct s_texture
 {
+	char	*tex_name;
     void    *img;           // Pointer to the texture image
     int     width;          // Width of the texture
     int     height;         // Height of the texture
@@ -208,7 +209,7 @@ int	clear_all(t_data *data);
 void	render_map(t_data *data);
 
 //texters
-void    load_textures(t_data *data);
+int    load_textures(t_data *data);
 // int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
 void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_height);
 #endif
