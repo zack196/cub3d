@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/17 22:08:03 by zel-oirg         ###   ########.fr       */
-=======
-/*   Updated: 2024/11/17 16:45:59 by hel-band         ###   ########.fr       */
->>>>>>> 7ca3eb740325d93a0c35c2e7722fcc9924235d3a
+/*   Updated: 2024/11/17 22:35:00 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +117,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	atexit(f);
+	// atexit(f);
 	if (ac != 2)
 		print_error(*av, "numberd argument not valid\n", 1);
 	ft_init_game(&data);
