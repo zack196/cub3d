@@ -1,4 +1,4 @@
-#include "../../include/cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	render_map(t_data *data)
 {
@@ -89,7 +89,7 @@ int    render_game(t_data *data)
 {
 	// mlx_clear_window(data->mlx, data->win_ptr);
 	render_walls(data);
-	// mini_map(data);
+	mini_map(data);
 	// render_map(data);
 	// render_rays(data);
 	// render_player(data);

@@ -3,6 +3,7 @@ INIT_DIR		=	src/init/
 RAY_CASTING		=	src/display_game/
 CFLAGS          =   -Wall -Wextra -Werror -fsanitize=address
 NAME            =   cub3d
+BONUS 			=	cub3d_bonus
 LIBFT_DIR       =   libft
 LIBFT           =   $(LIBFT_DIR)/libft.a
 CC              =   cc
@@ -24,21 +25,50 @@ SRC             =   main.c \
 					$(RAY_CASTING)events.c \
 					$(RAY_CASTING)utiles.c \
 					$(RAY_CASTING)ray.c \
-					$(RAY_CASTING)tex.c \
-					bonus/mini_map.c
+					$(RAY_CASTING)tex.c 
+
+
+
+SRC_BONUS		=	bonus/main_bonus.c \
+					bonus/parsing/pars_file_bonus.c \
+					bonus/parsing/pars_map_bonus.c \
+					bonus/parsing/add_data_bonus.c \
+					bonus/parsing/check_texture_colors_bonus.c \
+					bonus/parsing/my_malloc_bonus.c \
+					bonus/parsing/pars_walls_bonus.c \
+					bonus/parsing/parsing_cub_bonus.c \
+					bonus/parsing/parsing_utils_bonus.c \
+					bonus/init/init_bonus.c \
+					bonus/display_game/render_bonus.c \
+					bonus/display_game/events_bonus.c \
+					bonus/display_game/utiles_bonus.c \
+					bonus/display_game/ray_bonus.c \
+					bonus/display_game/tex_bonus.c \
+					bonus/display_game/mini_map_bonus.c
+
 
 OBJ             =   $(SRC:.c=.o)
+OBJ_BONUS		=	$(SRC_BONUS:.c=.o)
 
 all: $(LIBFT) $(NAME)
+
+bonus: $(LIBFT) $(BONUS)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-%.o: %.c $(INCLUDE)
+$(OBJ) : $(INCLUDE)
+
+$(OBJ_BONUS) : bonus/cub3d_bonus.h
+
+%.o: %.c 
 	$(CC) $(CFLAGS) $(INC) -Imlx -c $< -o $@
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(F_LFT) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+$(BONUS): $(OBJ_BONUS)
+	$(CC) $(OBJ_BONUS) $(F_LFT) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(BONUS)
 
 #lunix
 # %.o: %.c
@@ -57,10 +87,12 @@ $(NAME): $(OBJ)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
+	@rm -f $(OBJ_BONUS)
 	@rm -f $(OBJ)
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
+	@rm -f $(BONUS)
 	@rm -f $(NAME)
 
 re: fclean all
