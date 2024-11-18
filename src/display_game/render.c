@@ -84,11 +84,12 @@ void	render_walls(t_data *data)
 		}
 	}
 }
-
+void	mini_map(t_data *data);
 int    render_game(t_data *data)
 {
 	// mlx_clear_window(data->mlx, data->win_ptr);
 	render_walls(data);
+	mini_map(data);
 	// render_map(data);
 	// render_rays(data);
 	// render_player(data);

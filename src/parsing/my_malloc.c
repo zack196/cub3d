@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:10:54 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 19:54:44 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:56:45 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,20 @@ static void	destroy(t_gdata **g_data)
 void    *my_malloc(size_t size, int free_mode)
 {
     static t_gdata	*g_data;
-	static int	i;
     t_gdata			*new;
 
     if (!free_mode)
     {
 		new = malloc(sizeof (t_gdata));
 		if (!new)
-			return (destroy(&g_data), NULL);
+			return (NULL);
 		new->data = malloc(size);
 		if (!new->data)
-			return (destroy(&g_data), NULL);
+			return (NULL);
 		new->next = g_data;
 		g_data = new;
-		i++;
 		return (new->data);
     }
 	else
-	{
 		return (destroy(&g_data), NULL);
-	}
 }

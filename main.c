@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 22:35:00 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:01:09 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,11 @@ int	clear_all(t_data *data)
 	i = -1;
 	while (++i < 4)
 	if (data->textures[i].img)
-	{
 		mlx_destroy_image(data->mlx, data->textures[i].img);
-		data->textures[i].img = NULL;
-	}
 	if (data->image.img)
-	{
 		mlx_destroy_image(data->mlx, data->image.img);
-		data->image.img = NULL;
-	}
 	if (data->win_ptr)
-	{
 		mlx_destroy_window(data->mlx, data->win_ptr);
-		data->win_ptr = NULL;
-	}
 	my_free();
 	exit(0);
 	return (0);
@@ -101,6 +92,8 @@ void	init_game(t_data *data)
 	data->fov_angle = 60 * M_PI / 180;
 	//player initialisation
 	data->player = my_malloc(sizeof (t_player), 0);
+	if (!data->player)
+		return ((void)clear_all(data));
 	data->player->player_coor.x = data->tile_size * data->carte.player.x
 		+ data->tile_size / 2;
 	data->player->player_coor.y = data->tile_size * data->carte.player.y
@@ -109,6 +102,8 @@ void	init_game(t_data *data)
 	//rays
 	data->nbr_rays = data->win_width;
 	data->rays = my_malloc(sizeof (t_ray) * data->nbr_rays, 0);
+	if (!data->player)
+		return ((void)clear_all(data));
 	send_rays(data);
 }
 void	f()
@@ -122,6 +117,8 @@ int	main(int ac, char **av)
 		print_error(*av, "numberd argument not valid\n", 1);
 	ft_init_game(&data);
 	data.carte.filename = ft_strdup(av[1]);
+	if (!data.carte.filename)
+		return (clear_all(&data), 1);
 	ft_parsing(&data);
 	if (display_game(&data))
 		return (clear_all(&data), 1);

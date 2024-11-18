@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:17:53 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 16:28:11 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:12:22 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int ft_get_number_line(char *av)
     while (line != NULL)
     {
         number_lines++;
-        // free(line);
         line = get_next_line(fd);
     }
     close(fd);
@@ -62,7 +61,6 @@ void ft_pars_map(t_data *data)
     data->carte.nbr_line = ft_get_number_line(data->carte.filename);
     if (data->carte.nbr_line == 0)
         print_error(data->carte.filename, "nbr_line_in_map_invalid:", 1);
-
     close(fd);
     ft_remplir_map(data);
 }

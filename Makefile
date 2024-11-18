@@ -24,7 +24,8 @@ SRC             =   main.c \
 					$(RAY_CASTING)events.c \
 					$(RAY_CASTING)utiles.c \
 					$(RAY_CASTING)ray.c \
-					$(RAY_CASTING)tex.c
+					$(RAY_CASTING)tex.c \
+					bonus/mini_map.c
 
 OBJ             =   $(SRC:.c=.o)
 
