@@ -16,11 +16,25 @@ int is_wall(t_data *data, int x, int y)
 
     x_map_coor = x / data->tile_size;
     y_map_coor = y / data->tile_size;
-    // printf("cub[%d] = %s^\n", x_map_coor, data->carte.cub[x_map_coor]);
     if (x_map_coor >= data->carte.row 
         || y_map_coor >= ft_strlen(data->carte.cub[x_map_coor]))
         return (1);
-    if (!ft_strchr("0NEWS", data->carte.cub[x_map_coor][y_map_coor]))
+    if (!ft_strchr("0DNEWS", data->carte.cub[x_map_coor][y_map_coor]))
+        return (1);
+    return (0);
+}
+
+int is_door(t_data *data, int x, int y)
+{
+    int x_map_coor;
+    int y_map_coor;
+
+    x_map_coor = x / data->tile_size;
+    y_map_coor = y / data->tile_size;
+    if (x_map_coor >= data->carte.row 
+        || y_map_coor >= ft_strlen(data->carte.cub[x_map_coor]))
+        return (0);
+    if (data->open_door && data->carte.cub[x_map_coor][y_map_coor] == 'D')
         return (1);
     return (0);
 }

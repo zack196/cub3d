@@ -17,8 +17,8 @@ float	distance(t_vector a, t_float_vector b)
 
 t_float_vector   vertical_wall_hit_distance(t_ray *ray, t_data *data)
 {
-	float	x_step;
-	float	y_step;
+	float			x_step;
+	float			y_step;
 	t_float_vector	inter;
 
 	inter.x = floor(data->player->player_coor.x / data->tile_size
@@ -32,7 +32,8 @@ t_float_vector   vertical_wall_hit_distance(t_ray *ray, t_data *data)
         < data->map_width)
 	{
 		if (is_wall(data, (int)(inter.x - ray->ray_facing_up
-			+ !ray->ray_facing_up), (int)inter.y))
+			+ !ray->ray_facing_up), (int)inter.y) || is_door(data, (int)(inter.x
+			- ray->ray_facing_up + !ray->ray_facing_up), (int)inter.y))
 			break ;
 		inter.x += x_step;
 		inter.y += y_step;
@@ -42,10 +43,8 @@ t_float_vector   vertical_wall_hit_distance(t_ray *ray, t_data *data)
 
 t_float_vector	horizontal_wall_hit_distace(t_ray *ray, t_data *data)
 {
-	float	x_step;
-	float	y_step;
-	// float	x_intersection;
-	// float	y_intersection;
+	float			x_step;
+	float			y_step;
 	t_float_vector	inter;
 
 	inter.y = floor(data->player->player_coor.y / data->tile_size
@@ -58,9 +57,10 @@ t_float_vector	horizontal_wall_hit_distace(t_ray *ray, t_data *data)
         < data->map_height && inter.y
         < data->map_width)
 	{
-		if (is_wall(data, (int)inter.x, (int)(inter.y
-			+ ray->ray_facing_right - !ray->ray_facing_right)))
-				break ;
+		if (is_wall(data, (int)inter.x, (int)(inter.y + ray->ray_facing_right 
+			- !ray->ray_facing_right)) || is_door(data, (int)inter.x
+			, (int)(inter.y + ray->ray_facing_right - !ray->ray_facing_right)))
+			break ;
 		inter.x += x_step;
 		inter.y += y_step;
 	}
@@ -81,6 +81,12 @@ void	get_rays_values(t_data *data, t_ray *ray, t_float_vector vert, t_float_vect
 		ray->hit_coord = vert;
 		ray->is_hit_vertical = 1;
 	}
+	ray->is_door = 0;
+	if (is_door(data, ray->hit_coord.x, ray->hit_coord.y)
+		|| (ray->ray_facing_up && is_door(data, ray->hit_coord.x - 1, ray->hit_coord.y))
+		|| (!ray->ray_facing_right && is_door(data, ray->hit_coord.x, ray->hit_coord.y - 1))
+	)
+		ray->is_door = 1;
 }
 
 void    send_rays(t_data *data)

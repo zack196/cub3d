@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:09:30 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 22:13:16 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int load_textures(t_data *data)
 	data->textures[1].tex_name = data->carte.south_texture;
 	data->textures[2].tex_name = data->carte.east_texture;
 	data->textures[3].tex_name = data->carte.west_texture;
+	data->textures[4].tex_name = "textures/door_64.xpm";
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		data->textures[i].img = mlx_xpm_file_to_image(data->mlx
 			, data->textures[i].tex_name
@@ -57,7 +58,12 @@ void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_hei
 	int				tex_y;
 	t_texture		*tex;
 
-	if (ray->ray_facing_up && ray->is_hit_vertical)
+	
+	if (ray->is_door)
+	{
+		tex = &data->textures[4];
+	}
+	else if (ray->ray_facing_up && ray->is_hit_vertical)
 		tex = &data->textures[0];
 	else if (!ray->ray_facing_up && ray->is_hit_vertical)
 		tex = &data->textures[1];
@@ -65,6 +71,7 @@ void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_hei
 		tex = &data->textures[2];
 	else
 		tex = &data->textures[3];
+	
 	if (ray->is_hit_vertical)
 		tex_y = (int)ray->hit_coord.y % data->tile_size;
 	else

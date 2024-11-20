@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:44:01 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:15:31 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdbool.h>
 # include <sys/errno.h>
 # include <string.h>
 # include <limits.h>
@@ -41,7 +42,7 @@
 # define EAST_TEXTURE "EA"
 # define WEST_TEXTURE "WE"
 
-# define MAP_SCALE 1
+# define MAP_SCALE 1.7
 #define STEP 15
 #define ROTATION_STEP 10
 
@@ -146,8 +147,11 @@ typedef struct s_data
 	void			*mlx;
 	void			*win_ptr;
 	t_image			image;
-	t_texture   	textures[4];
+	t_texture   	textures[5];
+	// door
 	t_texture		door;
+	int				open_door;
+
     int         	ac;
     char        	**av;
 	int				win_height;
@@ -230,7 +234,7 @@ void	render_map(t_data *data);
 //texters
 int		load_textures(t_data *data);
 // int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
-void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_height);
+void 	render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_height);
 
 //bonus 
 void	mini_map(t_data *data);
@@ -240,6 +244,7 @@ void	init_sprite(t_data *data);
 int		pres_mousse(int button, int x, int y, t_data *data);
 void	mousse_render(t_data *data, int frame);
 
-int render_sprite_animation(t_data *data);
+int 	render_sprite_animation(t_data *data);
 void	begin_animation(t_data *data);
+int 	is_door(t_data *data, int x, int y);
 #endif

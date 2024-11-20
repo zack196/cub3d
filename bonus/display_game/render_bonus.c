@@ -13,6 +13,8 @@ void	render_map(t_data *data)
 		{
 			if (is_wall(data, x, y))
 				my_mlx_pixel_put(&data->image, x, y, 0X696969);
+			else if (is_door(data, x, y))
+				my_mlx_pixel_put(&data->image, x, y, 0X99092F);
 			else
 				my_mlx_pixel_put(&data->image, x, y, 0XFFFFFF);
 		}
@@ -52,7 +54,10 @@ void	render_rays(t_data *data)
 	{
 		end.x = data->player->player_coor.x +  sin(data->rays[i].angle) * data->rays[i].distance;
 		end.y = data->player->player_coor.y +  cos(data->rays[i].angle) * data->rays[i].distance;
-		draw_line(&data->image, data->player->player_coor, end, 0X87CEEB);
+		draw_line(&data->image, data->player->player_coor, end, 0XF0CEEB);
+		// if (data->rays[i].is_door)
+		// 	draw_line(&data->image, data->player->player_coor, end, 0XA7C00B);
+
 	}
 }
 
@@ -87,6 +92,11 @@ void	render_walls(t_data *data)
 
 void    render_game(t_data *data)
 {
+	// render_map(data);
+	// render_player(data);
+	// render_rays(data);
+	// mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
+	
 	render_walls(data);
 	mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);

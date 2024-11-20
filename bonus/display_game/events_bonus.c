@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/20 04:59:49 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 22:05:23 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_player_move(t_data *data, int x, int y)
 	{
 		j = y - facteur;
 		while (++j < y + facteur)
-			if (is_wall(data, i, j))
+			if (is_wall(data, i, j) || is_door(data, x, y))
 				return (0);
 	}
 	return (1);
@@ -75,6 +75,8 @@ int	pres_bouton(int keycode, t_data *data)
 		rotation = ROTATION_STEP;
 	else if (keycode == 53)
 		clear_all(data);
+	else if (keycode == 49)
+		data->open_door = !data->open_door;
 	update_player(data, walk, turn, rotation);
 	send_rays(data);
 	render_game(data);
@@ -96,7 +98,6 @@ int	pres_mousse(int button, int x, int y, t_data *data)
 		begin_animation(data);
 		mlx_loop_hook(data->mlx, render_sprite_animation, data);
 	}
-	render_game(data);
 	(void)x;
 	(void)y;
 	return (0);

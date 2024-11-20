@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 05:05:09 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 05:31:46 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	clear_all(t_data *data)
 
 void	init_game(t_data *data)
 {
+	data->open_door = 0;
 	data->mini_map_height = 400;
 	data->mini_map_width = 400;
 	data->mini_tile_size = 20;
@@ -107,8 +108,8 @@ void	init_game(t_data *data)
 		return ((void)clear_all(data));
 	send_rays(data);
 }
-void	f()
-{system("leaks cub");}
+
+void	f(){system("leaks cub");}
 int	main(int ac, char **av)
 {
 	t_data	data;
