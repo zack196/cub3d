@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/18 18:42:12 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:44:01 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include <sys/time.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -24,7 +25,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <unistd.h>
-
+# define NBR_FRAME 75
 # define EQUAL 0
 //****COLORS
 # define RESET	"\e[0m"
@@ -41,22 +42,10 @@
 # define WEST_TEXTURE "WE"
 
 # define MAP_SCALE 1
-// # define HEIGHT 720
-// # define WIDTH 1280
 #define STEP 15
 #define ROTATION_STEP 10
 
-typedef struct s_texture
-{
-	char	*tex_name;
-    void    *img;           // Pointer to the texture image
-    int     width;          // Width of the texture
-    int     height;         // Height of the texture
-    int     bits_per_pixel; // Bits per pixel for the texture
-    int     line_length;    // Line length for the texture
-    int     endian;         // Endianess for the texture
-    char    *addr;          // Pointer to the texture's data
-}               t_texture;
+
 
 typedef struct s_gdata
 {
@@ -89,15 +78,12 @@ typedef struct s_map
 	int			col;
 	int			nbr_line;
 	char		**file;
-
 	char		*north_texture;
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
-	
 	t_color		floor_color;
 	t_color		ceilling_color;
-	
 	char		starting_derection;
 	int			index_end_of_map;
 	char		**cub;
@@ -127,8 +113,32 @@ typedef struct s_ray
 	int				ray_facing_right;
 	int				ray_facing_up;
 	int				is_hit_vertical;
+	int				is_door;
 	t_float_vector	hit_coord;
 }	t_ray;
+
+typedef struct s_texture
+{
+	char	*tex_name;
+	char	*addr;
+	void	*img;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length; 
+	int		endian;
+} 		t_texture;
+
+typedef struct s_sprite
+{
+	t_texture	frame[NBR_FRAME];
+	long		last_render;
+	long		frame_delay;
+	int			x;
+	int			y;
+	int			curent_frame;
+	int			stop_animation;
+}		t_sprite;
 
 typedef struct s_data
 {
@@ -137,6 +147,7 @@ typedef struct s_data
 	void			*win_ptr;
 	t_image			image;
 	t_texture   	textures[4];
+	t_texture		door;
     int         	ac;
     char        	**av;
 	int				win_height;
@@ -154,15 +165,18 @@ typedef struct s_data
 	int				nbr_rays;
 	t_ray			*rays;
 	float			fov_angle;
-	///////////////////
-	//a remplir
+	
+	//colors
 	unsigned int	ceiling_color;
 	unsigned int	floor_color;
-	///////////////////
+	
 	//mini_map
 	int				mini_map_height;
 	int				mini_map_width;
 	int				mini_tile_size;
+
+	//sprite animation
+	t_sprite	sprite;	
 }	t_data;
 
 // *** parsing ***:
@@ -171,7 +185,7 @@ int		print_error(char *arg, char *str, int fd);
 int		ft_pars_file(char *arg);
 void	ft_pars_map(t_data *data);
 void	ft_find_content(t_data *data);
-void	ft_spl_free(char **spl);
+// void	ft_spl_free(char **spl);
 void    ft_add_textures(t_data *data);
 void    ft_add_colors(t_data *data);
 int		ft_len_map(t_data  *data);
@@ -195,8 +209,8 @@ int pres_bouton(int keycode, t_data *cub);
 int release_bouton(int keycode, t_data *cub);
 
 //redring 
-// void    render_game(t_data *data);
-int		render_game(t_data *data);
+void	render_walls(t_data *data);
+void		render_game(t_data *data);
 //utiles
 float	angle_normalize(float angle);
 int		is_wall(t_data *data, int x, int y);
@@ -209,7 +223,7 @@ int		mini_wall(t_data *data, int x, int y, int tile_size);
 void	send_rays(t_data *data);
 
 
-
+long	now(void);
 int		clear_all(t_data *data);
 void	render_map(t_data *data);
 
@@ -217,4 +231,15 @@ void	render_map(t_data *data);
 int		load_textures(t_data *data);
 // int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
 void render_textured_wall(t_data *data, int x, int y, t_ray *ray, float wall_height);
+
+//bonus 
+void	mini_map(t_data *data);
+int		load_sprite(t_data *data);
+int 	get_texture_color(t_texture *tex, int tex_x, int tex_y);
+void	init_sprite(t_data *data);
+int		pres_mousse(int button, int x, int y, t_data *data);
+void	mousse_render(t_data *data, int frame);
+
+int render_sprite_animation(t_data *data);
+void	begin_animation(t_data *data);
 #endif

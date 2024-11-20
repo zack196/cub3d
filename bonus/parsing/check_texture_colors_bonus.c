@@ -6,17 +6,34 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:13:29 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/18 18:11:00 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:40:55 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
+static void ft_process_texture_line(t_data *data, int *ptr, int *flag, int *color)
+{
+    char *line;
+
+    line = ft_strtrim(data->map[*ptr], " ");
+    if (!line)
+        print_error("", "Error trimming line", 1);
+    if (ft_strncmp(line, "NO ", 3) == 0 ||
+        ft_strncmp(line, "SO ", 3) == 0 ||
+        ft_strncmp(line, "WE ", 3) == 0 ||
+        ft_strncmp(line, "EA ", 3) == 0)
+        (*flag)++;
+    else if (ft_strncmp(line, "F ", 2) == 0 ||
+             ft_strncmp(line, "C ", 2) == 0)
+        (*color)++;
+    // (lifreene);
+}
+
 static void ft_pars_texture(t_data *data, int *ptr)
 {
     int flag = 0;
     int color = 0;
-    char *line;
 
     while (data->map[*ptr])
     {
@@ -26,29 +43,17 @@ static void ft_pars_texture(t_data *data, int *ptr)
             break;
         if (data->map[*ptr][0] == '1' || data->map[*ptr][0] == '0')
             break;
-        line = ft_strtrim(data->map[*ptr], " ");
-        if (!line)
-            print_error("", "Error trimming line", 1);
-        if (ft_strncmp(line, "NO ", 3) == 0 ||
-            ft_strncmp(line, "SO ", 3) == 0 ||
-            ft_strncmp(line, "WE ", 3) == 0 ||
-            ft_strncmp(line, "EA ", 3) == 0)
-            flag++;
-        else if (ft_strncmp(line, "F ", 2) == 0 ||
-            ft_strncmp(line, "C ", 2) == 0)
-            color++;
-        // free(line);
+        ft_process_texture_line(data, ptr, &flag, &color);
         (*ptr)++;
     }
-
     if (flag != 4)
         print_error("", "Error in textures ", 1);
-    if (color!= 2)
+    if (color != 2)
         print_error("", "Error in  colors", 1);
-
     if (*ptr == 0)
         print_error("", "Empty map", 1);
 }
+
 
 void ft_find_content(t_data *data)
 {

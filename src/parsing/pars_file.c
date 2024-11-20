@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:20:18 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 23:12:14 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:28:45 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	print_error(char *arg, char *str, int fd)
 		ft_putstr_fd(str, 2);
 	}
 	ft_putstr_fd("\n", 2);
-	my_free();
 	exit(fd);
 }
 static int ft_derctory(char *arg)

@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:20:18 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/18 18:10:49 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:10:05 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	print_error(char *arg, char *str, int fd)
 		ft_putstr_fd(str, 2);
 	}
 	ft_putstr_fd("\n", 2);
-	my_free();
 	exit(fd);
 }
 static int ft_derctory(char *arg)

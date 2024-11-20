@@ -35,6 +35,8 @@ int		is_mini_wall(t_data *data, int x, int y)
 	if (x_map == data->player->player_map.x
 		&& y_map == data->player->player_map.y)
 		return (2);
+	if (data->carte.cub[x_map][y_map] == 'D')
+		return (3);
 	return (0);
 }
 
@@ -53,6 +55,8 @@ void	mini_map(t_data *data)
 				my_mlx_pixel_put(&data->image, x, y, 0X696969);
 			else if (is_mini_wall(data, x, y) == 2)//player
 				my_mlx_pixel_put(&data->image, x, y, 0X007AFF);
+			else if (is_mini_wall(data, x, y) == 3)//door
+				my_mlx_pixel_put(&data->image, x, y, 0X587AF0);
 			else if (!(x % data->mini_tile_size) || !(y % data->mini_tile_size))
 				my_mlx_pixel_put(&data->image, x, y, 0X007AFF);
 			else

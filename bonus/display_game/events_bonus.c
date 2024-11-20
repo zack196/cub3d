@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/18 18:11:53 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:59:49 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,20 @@ int	pres_bouton(int keycode, t_data *data)
 int	release_bouton(int keycode, t_data *data)
 {
 	(void)keycode;
+	data->sprite.stop_animation = 1;
 	render_game(data);
+	return (0);
+}
+
+int	pres_mousse(int button, int x, int y, t_data *data)
+{
+	if (button == 1)
+	{
+		begin_animation(data);
+		mlx_loop_hook(data->mlx, render_sprite_animation, data);
+	}
+	render_game(data);
+	(void)x;
+	(void)y;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/18 18:47:39 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 05:05:09 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	init_mlx(t_data *data)
 }
 int	display_game(t_data *data)
 {
-	data->win_width = 1700;
-	data->win_height = 1350;
 	init_mlx(data);
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -57,8 +55,11 @@ int	display_game(t_data *data)
 		, &data->image.endian);
 	if (!data->image.addr)
 		return (1);
-	if (load_textures(data))
+	init_sprite(data);
+	if (load_textures(data) || load_sprite(data))
 		return (1);
+		
+	mlx_mouse_hook(data->win_ptr, pres_mousse, data);
 	mlx_hook(data->win_ptr, 2, (1L<<0), pres_bouton, data);
 	mlx_hook(data->win_ptr, 3, (1L<<1), release_bouton, data);
 	mlx_hook(data->win_ptr, 17, 0L, clear_all, data);
@@ -85,24 +86,21 @@ int	clear_all(t_data *data)
 
 void	init_game(t_data *data)
 {
-	// initialize some constant for the display of mini map
-	data->tile_size = 64;
-	data->mini_tile_size = 20;
 	data->mini_map_height = 400;
 	data->mini_map_width = 400;
+	data->mini_tile_size = 20;
+	data->win_width = 1700;
+	data->win_height = 1350;
+	data->tile_size = 64;
 	data->map_height = data->carte.row * data->tile_size;
 	data->map_width = data->carte.col * data->tile_size;
 	data->fov_angle = 60 * M_PI / 180;
-	//player initialisation
 	data->player = my_malloc(sizeof (t_player), 0);
-	if (!data->player)
-		return ((void)clear_all(data));
 	data->player->player_coor.x = data->tile_size * data->carte.player.x
 		+ data->tile_size / 2;
 	data->player->player_coor.y = data->tile_size * data->carte.player.y
 		+ data->tile_size / 2;
 	data->player->player_rotation = init_player_rotation(data);
-	//rays
 	data->nbr_rays = data->win_width;
 	data->rays = my_malloc(sizeof (t_ray) * data->nbr_rays, 0);
 	if (!data->player)
@@ -121,13 +119,11 @@ int	main(int ac, char **av)
 	ft_init_game(&data);
 	data.carte.filename = ft_strdup(av[1]);
 	if (!data.carte.filename)
-		return (clear_all(&data), 1);
+		return (1);
 	ft_parsing(&data);
+	init_game(&data);
 	if (display_game(&data))
 		return (clear_all(&data), 1);
-	// initialize some constant for the display of mini map
-	init_game(&data);
-	// render
 	render_game(&data);
 	mlx_loop(data.mlx);
 	clear_all(&data);

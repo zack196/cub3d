@@ -76,11 +76,11 @@ void	render_walls(t_data *data)
 		while (++x < data->win_height)
 		{
 			if ((data->win_height - wall_height) / 2 > x)
-				my_mlx_pixel_put(&data->image, x, y, 0X1E90FF);
+				my_mlx_pixel_put(&data->image, x, y, data->ceiling_color);
 			else if (x < (data->win_height + wall_height) / 2)
 				render_textured_wall(data, x, y, &data->rays[y], wall_height);
 			else
-				my_mlx_pixel_put(&data->image, x, y, 0XA9A9A9);
+				my_mlx_pixel_put(&data->image, x, y, data->floor_color);
 		}
 	}
 }

@@ -6,11 +6,21 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:59:27 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 22:40:22 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:43:45 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+// void	ft_spl_free(char **spl)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (spl[i])
+// 		free(spl[i++]);
+// 	free(spl);
+// }
 
 int	ft_len_map(t_data  *data)
 {

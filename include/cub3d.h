@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 22:49:01 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:41:22 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int		print_error(char *arg, char *str, int fd);
 int		ft_pars_file(char *arg);
 void	ft_pars_map(t_data *data);
 void	ft_find_content(t_data *data);
-void	ft_spl_free(char **spl);
+// void	ft_spl_free(char **spl);
 void    ft_add_textures(t_data *data);
 void    ft_add_colors(t_data *data);
 int		ft_len_map(t_data  *data);

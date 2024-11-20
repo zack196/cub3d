@@ -76,23 +76,20 @@ void	render_walls(t_data *data)
 		while (++x < data->win_height)
 		{
 			if ((data->win_height - wall_height) / 2 > x)
-				my_mlx_pixel_put(&data->image, x, y, 0X1E90FF);
+				my_mlx_pixel_put(&data->image, x, y, data->ceiling_color);
 			else if (x < (data->win_height + wall_height) / 2)
 				render_textured_wall(data, x, y, &data->rays[y], wall_height);
 			else
-				my_mlx_pixel_put(&data->image, x, y, 0XA9A9A9);
+				my_mlx_pixel_put(&data->image, x, y, data->floor_color);
 		}
 	}
 }
-void	mini_map(t_data *data);
-int    render_game(t_data *data)
+
+void    render_game(t_data *data)
 {
-	// mlx_clear_window(data->mlx, data->win_ptr);
 	render_walls(data);
 	mini_map(data);
-	// render_map(data);
-	// render_rays(data);
-	// render_player(data);
 	mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
-	return (0);
+	mlx_put_image_to_window(data->mlx, data->win_ptr, data->sprite.frame[0].img
+		, data->sprite.x, data->sprite.y);
 }

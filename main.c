@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 23:01:09 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 02:01:42 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	init_mlx(t_data *data)
 }
 int	display_game(t_data *data)
 {
-	data->win_width = 1700;
-	data->win_height = 1350;
 	init_mlx(data);
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -86,6 +84,8 @@ int	clear_all(t_data *data)
 void	init_game(t_data *data)
 {
 	// initialize some constant for the display of mini map
+	data->win_width = 1700;
+	data->win_height = 1350;
 	data->tile_size = 64;
 	data->map_height = data->carte.row * data->tile_size;
 	data->map_width = data->carte.col * data->tile_size;
@@ -118,13 +118,11 @@ int	main(int ac, char **av)
 	ft_init_game(&data);
 	data.carte.filename = ft_strdup(av[1]);
 	if (!data.carte.filename)
-		return (clear_all(&data), 1);
+		return (1);
 	ft_parsing(&data);
+	init_game(&data);
 	if (display_game(&data))
 		return (clear_all(&data), 1);
-	// initialize some constant for the display of mini map
-	init_game(&data);
-	// render
 	render_game(&data);
 	mlx_loop(data.mlx);
 	clear_all(&data);
