@@ -1,65 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 21:54:13 by zel-oirg          #+#    #+#             */
+/*   Updated: 2024/11/21 21:54:14 by zel-oirg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
-
-void	render_map(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < data->map_height)
-	{
-		y = -1;
-		while (++y < data->map_width)
-		{
-			if (is_wall(data, x, y))
-				my_mlx_pixel_put(&data->image, x, y, 0X696969);
-			else if (is_door(data, x, y))
-				my_mlx_pixel_put(&data->image, x, y, 0X99092F);
-			else
-				my_mlx_pixel_put(&data->image, x, y, 0XFFFFFF);
-		}
-	}
-}
-
-void	render_player(t_data *data)
-{
-	int			x_player;
-	int			y_player;
-	int			x;
-	int			y;
-	t_vector	end;
-
-	x_player = data->player->player_coor.x; 
-	y_player = data->player->player_coor.y;
-	x = -1;
-	while (++x < data->map_height)
-	{
-		y = -1;
-		while (++y < data->map_width)
-			if (sqrt(pow(x_player - x, 2) + pow(y_player - y, 2)) < 5 * MAP_SCALE)
-					my_mlx_pixel_put(&data->image, x, y, 0X007AFF);
-	}
-	end.x = x_player + 25 * MAP_SCALE * sin(data->player->player_rotation);
-	end.y = y_player + 25 * MAP_SCALE * cos(data->player->player_rotation);
-	draw_line(&data->image, data->player->player_coor, end, 0XF20002);
-}
-
-void	render_rays(t_data *data)
-{
-	int			i;
-	t_vector	end;
-
-	i = -1;
-	while (++i < data->nbr_rays)
-	{
-		end.x = data->player->player_coor.x +  sin(data->rays[i].angle) * data->rays[i].distance;
-		end.y = data->player->player_coor.y +  cos(data->rays[i].angle) * data->rays[i].distance;
-		draw_line(&data->image, data->player->player_coor, end, 0XF0CEEB);
-		// if (data->rays[i].is_door)
-		// 	draw_line(&data->image, data->player->player_coor, end, 0XA7C00B);
-
-	}
-}
 
 void	render_walls(t_data *data)
 {
@@ -74,7 +25,7 @@ void	render_walls(t_data *data)
 	while (++y < data->win_width)
 	{
 		player_wall_distance = data->rays[y].distance * cos(data->rays[y].angle
-			- data->player->player_rotation);
+				- data->player->player_rotation);
 		wall_height = (data->tile_size * ply_projection_plane)
 			/ player_wall_distance;
 		x = -1;
@@ -83,23 +34,18 @@ void	render_walls(t_data *data)
 			if ((data->win_height - wall_height) / 2 > x)
 				my_mlx_pixel_put(&data->image, x, y, data->ceiling_color);
 			else if (x < (data->win_height + wall_height) / 2)
-				render_textured_wall(data, x, y, &data->rays[y], wall_height);
+				textured_wall(data, x, y, wall_height);
 			else
 				my_mlx_pixel_put(&data->image, x, y, data->floor_color);
 		}
 	}
 }
 
-void    render_game(t_data *data)
+void	render_game(t_data *data)
 {
-	// render_map(data);
-	// render_player(data);
-	// render_rays(data);
-	// mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
-	
 	render_walls(data);
 	mini_map(data);
 	mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win_ptr, data->sprite.frame[0].img
-		, data->sprite.x, data->sprite.y);
+	mlx_put_image_to_window(data->mlx, data->win_ptr, data->sprite.frame[0].img,
+		data->sprite.x, data->sprite.y);
 }

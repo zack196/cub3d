@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/21 21:49:40 by zel-oirg          #+#    #+#             */
+/*   Updated: 2024/11/21 21:53:27 by zel-oirg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d_bonus.h"
 
 long	now(void)
@@ -24,8 +36,8 @@ void	init_sprite(t_data *data)
 	i = -1;
 	while (++i < NBR_FRAME)
 	{
-	    data->sprite.frame[i].tex_name = ft_strjoin("sprite/"
-			, ft_strjoin(ft_itoa(i), ".xpm"));
+		data->sprite.frame[i].tex_name = ft_strjoin("sprite/",
+				ft_strjoin(ft_itoa(i), ".xpm"));
 		data->sprite.frame[i].addr = NULL;
 		data->sprite.frame[i].img = NULL;
 	}
@@ -38,14 +50,16 @@ int	load_sprite(t_data *data)
 	i = -1;
 	while (++i < NBR_FRAME)
 	{
-		data->sprite.frame[i].img = mlx_xpm_file_to_image(data->mlx
-			, data->sprite.frame[i].tex_name, &data->sprite.frame[i].width
-			, &data->sprite.frame[i].height);
+		data->sprite.frame[i].img = mlx_xpm_file_to_image(data->mlx,
+				data->sprite.frame[i].tex_name, &data->sprite.frame[i].width,
+				&data->sprite.frame[i].height);
 		if (!data->sprite.frame[i].img)
 			return (1);
-		data->sprite.frame[i].addr = mlx_get_data_addr(data->sprite.frame[i].img
-			, &data->sprite.frame[i].bits_per_pixel
-			, &data->sprite.frame[i].line_length, &data->sprite.frame[i].endian);
+		data->sprite.frame[i].addr
+			= mlx_get_data_addr(data->sprite.frame[i].img,
+				&data->sprite.frame[i].bits_per_pixel,
+				&data->sprite.frame[i].line_length,
+				&data->sprite.frame[i].endian);
 		if (!data->sprite.frame[i].addr)
 			return (1);
 	}
@@ -70,9 +84,11 @@ int	render_sprite_animation(t_data *data)
 		mlx_clear_window(data->mlx, data->win_ptr);
 		render_walls(data);
 		mini_map(data);
-		mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->win_ptr, data->image.img, 0,
+			0);
 		mlx_put_image_to_window(data->mlx, data->win_ptr,
-			data->sprite.frame[sprite->curent_frame].img, data->sprite.x, data->sprite.y);
+			data->sprite.frame[sprite->curent_frame].img, data->sprite.x,
+			data->sprite.y);
 		sprite->curent_frame++;
 		if (sprite->curent_frame >= NBR_FRAME)
 			(1) && (sprite->stop_animation = 1, sprite->curent_frame = 0);

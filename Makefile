@@ -46,6 +46,7 @@ SRC_BONUS		=	bonus/main_bonus.c \
 					bonus/display_game/tex_bonus.c \
 					bonus/display_game/mini_map_bonus.c \
 					bonus/display_game/sprite_bonus.c \
+					bonus/display_game/math_utiles_bonus.c \
 					bonus/display_game/mouse_move_bonus.c
 
 

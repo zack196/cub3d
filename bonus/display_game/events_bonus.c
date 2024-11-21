@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/20 23:14:32 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:02:19 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,28 @@ void	update_player(t_data *data, int walk, int turn, int rotation)
 	y_new_pos = player->player_coor.y + walk * cos(player->player_rotation)
 		- turn * sin(player->player_rotation);
 	player->player_rotation = angle_normalize(((1 * M_PI / 180) * rotation)
-		+ player->player_rotation);
+			+ player->player_rotation);
 	if (check_player_move(data, x_new_pos, y_new_pos))
 	{
 		player->player_coor.x = (int)x_new_pos;
 		player->player_coor.y = (int)y_new_pos;
 	}
+}
+
+void	get_button(int keycode, int *walk, int *turn, int *rotation)
+{
+	if (keycode == 0)
+		*turn = -STEP;
+	else if (keycode == 1)
+		*walk = -STEP;
+	else if (keycode == 2)
+		*turn = STEP;
+	else if (keycode == 13)
+		*walk = STEP;
+	else if (keycode == 123)
+		*rotation = -ROTATION_STEP;
+	else if (keycode == 124)
+		*rotation = ROTATION_STEP;
 }
 
 int	pres_bouton(int keycode, t_data *data)
@@ -61,25 +77,13 @@ int	pres_bouton(int keycode, t_data *data)
 	walk = 0;
 	rotation = 0;
 	turn = 0;
-	if (keycode == 0)//a lunix 97 macos 0
-		turn = -STEP;
-	else if (keycode == 1)//s lunix 115 macos 1
-		walk = -STEP;
-	else if (keycode == 2)//d lunix 100 macos 2
-		turn = STEP;
-	else if (keycode == 13)//w lunix 119 macos 13
-		walk = STEP;
-	else if (keycode == 123)//<< lunix 65361 macos 123
-		rotation = -ROTATION_STEP;
-	else if (keycode == 124)//>> lunix 65363 macos 124
-		rotation = ROTATION_STEP;
-	else if (keycode == 53)//esc
+	get_button(keycode, &walk, &turn, &rotation);
+	if (keycode == 53)
 		clear_all(data);
-	else if (keycode == 49)//' '
+	else if (keycode == 49)
 		data->open_door = !data->open_door;
-	if (keycode == 46)//m
+	if (keycode == 46)
 		data->mouse_active = !data->mouse_active;
-	// printf("bouton = %d\n", keycode);
 	update_player(data, walk, turn, rotation);
 	send_rays(data);
 	render_game(data);
@@ -91,19 +95,5 @@ int	release_bouton(int keycode, t_data *data)
 	(void)keycode;
 	data->sprite.stop_animation = 1;
 	render_game(data);
-	return (0);
-}
-
-
-
-int	pres_mousse(int button, int y, int x, t_data *data)
-{
-	if (button == 1)
-	{
-		begin_animation(data);
-		mlx_loop_hook(data->mlx, render_sprite_animation, data);
-	}
-	(void)x;
-	(void)y;
 	return (0);
 }

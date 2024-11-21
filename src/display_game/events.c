@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/16 01:04:21 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/21 22:20:48 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	update_player(t_data *data, int walk, int turn, int rotation)
 	y_new_pos = player->player_coor.y + walk * cos(player->player_rotation)
 		- turn * sin(player->player_rotation);
 	player->player_rotation = angle_normalize(((1 * M_PI / 180) * rotation)
-		+ player->player_rotation);
+			+ player->player_rotation);
 	if (check_player_move(data, x_new_pos, y_new_pos))
 	{
 		player->player_coor.x = (int)x_new_pos;
@@ -61,17 +61,17 @@ int	pres_bouton(int keycode, t_data *data)
 	walk = 0;
 	rotation = 0;
 	turn = 0;
-	if (keycode == 0)//a lunix 97 macos 0
+	if (keycode == 0)
 		turn = -STEP;
-	else if (keycode == 1)//s lunix 115 macos 1
+	else if (keycode == 1)
 		walk = -STEP;
-	else if (keycode == 2)//d lunix 100 macos 2
+	else if (keycode == 2)
 		turn = STEP;
-	else if (keycode == 13)//w lunix 119 macos 13
+	else if (keycode == 13)
 		walk = STEP;
-	else if (keycode == 123)//<< lunix 65361 macos 123
+	else if (keycode == 123)
 		rotation = -ROTATION_STEP;
-	else if (keycode == 124)//>> lunix 65363 macos 124
+	else if (keycode == 124)
 		rotation = ROTATION_STEP;
 	else if (keycode == 53)
 		clear_all(data);
