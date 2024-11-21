@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 21:15:31 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:46:06 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define MAP_SCALE 1.7
 #define STEP 15
 #define ROTATION_STEP 10
+#define MOUSSE_SENSITIVITY 0.006
 
 
 
@@ -141,6 +142,9 @@ typedef struct s_sprite
 	int			stop_animation;
 }		t_sprite;
 
+
+
+
 typedef struct s_data
 {
 	//mlx
@@ -162,6 +166,7 @@ typedef struct s_data
 	int				tile_size;
 	t_map	    	carte;
 	char			**map;
+	
 	//player data
 	t_player		*player;
 
@@ -180,7 +185,10 @@ typedef struct s_data
 	int				mini_tile_size;
 
 	//sprite animation
-	t_sprite	sprite;	
+	t_sprite	sprite;
+	// mouse
+	int	mouse_active;
+	// t_vector	mousse;
 }	t_data;
 
 // *** parsing ***:
@@ -247,4 +255,12 @@ void	mousse_render(t_data *data, int frame);
 int 	render_sprite_animation(t_data *data);
 void	begin_animation(t_data *data);
 int 	is_door(t_data *data, int x, int y);
+int	mouse_move_hook(int x, int y, t_data *data);
+
+
+t_float_vector	horizontal_wall_hit_distace(t_ray *ray, t_data *data);
+t_float_vector   vertical_wall_hit_distance(t_ray *ray, t_data *data);
+float	distance(t_vector a, t_float_vector b);
+void	ray_facing(t_ray *ray);
+void	get_rays_values(t_data *data, t_ray *ray, t_float_vector vert, t_float_vector horz);
 #endif

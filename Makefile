@@ -1,7 +1,7 @@
 EXEC_DIR        =   src/parsing/
 INIT_DIR		=	src/init/
 RAY_CASTING		=	src/display_game/
-CFLAGS          =   -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS          =   -Wall -Wextra -Werror -fsanitize=address -g
 NAME            =   cub3d
 BONUS 			=	cub3d_bonus
 LIBFT_DIR       =   libft
@@ -45,7 +45,8 @@ SRC_BONUS		=	bonus/main_bonus.c \
 					bonus/display_game/ray_bonus.c \
 					bonus/display_game/tex_bonus.c \
 					bonus/display_game/mini_map_bonus.c \
-					bonus/display_game/sprite_bonus.c
+					bonus/display_game/sprite_bonus.c \
+					bonus/display_game/mouse_move_bonus.c
 
 
 OBJ             =   $(SRC:.c=.o)

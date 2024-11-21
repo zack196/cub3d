@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:52:10 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/20 22:05:23 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 23:14:32 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,13 @@ int	pres_bouton(int keycode, t_data *data)
 		rotation = -ROTATION_STEP;
 	else if (keycode == 124)//>> lunix 65363 macos 124
 		rotation = ROTATION_STEP;
-	else if (keycode == 53)
+	else if (keycode == 53)//esc
 		clear_all(data);
-	else if (keycode == 49)
+	else if (keycode == 49)//' '
 		data->open_door = !data->open_door;
+	if (keycode == 46)//m
+		data->mouse_active = !data->mouse_active;
+	// printf("bouton = %d\n", keycode);
 	update_player(data, walk, turn, rotation);
 	send_rays(data);
 	render_game(data);
@@ -91,7 +94,9 @@ int	release_bouton(int keycode, t_data *data)
 	return (0);
 }
 
-int	pres_mousse(int button, int x, int y, t_data *data)
+
+
+int	pres_mousse(int button, int y, int x, t_data *data)
 {
 	if (button == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:26:05 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 05:31:46 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/20 23:15:33 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int	display_game(t_data *data)
 	init_sprite(data);
 	if (load_textures(data) || load_sprite(data))
 		return (1);
-		
 	mlx_mouse_hook(data->win_ptr, pres_mousse, data);
 	mlx_hook(data->win_ptr, 2, (1L<<0), pres_bouton, data);
 	mlx_hook(data->win_ptr, 3, (1L<<1), release_bouton, data);
 	mlx_hook(data->win_ptr, 17, 0L, clear_all, data);
+	mlx_hook(data->win_ptr, 6, 1L << 6, mouse_move_hook, data);
+	
 	return (0);
 }
 
@@ -87,6 +88,7 @@ int	clear_all(t_data *data)
 void	init_game(t_data *data)
 {
 	data->open_door = 0;
+	data->mouse_active = 0;
 	data->mini_map_height = 400;
 	data->mini_map_width = 400;
 	data->mini_tile_size = 20;
