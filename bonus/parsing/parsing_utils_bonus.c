@@ -3,35 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:59:27 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:41:14 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:20:40 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../include/cub3d.h"
 
-// void	ft_spl_free(char **spl)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (spl[i])
-// 		free(spl[i++]);
-// 	free(spl);
-// }
-
-int	ft_len_map(t_data  *data)
+int	ft_len_map(t_data *data)
 {
 	int		i;
 	int		size;
+	char	*line;
 
 	i = 0;
 	size = 0;
 	while (data->map[i])
 	{
-		char *line = ft_strtrim(data->map[i], " ");
+		line = ft_strtrim(data->map[i], " ");
 		if (line[0] == '1' || line[0] == '0')
 		{
 			size++;
@@ -58,4 +49,27 @@ int	ft_find_char(char x, char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_find_player_pos(t_map *map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (map->cub[row])
+	{
+		col = 0;
+		while (map->cub[row][col])
+		{
+			if (ft_find_char(map->cub[row][col], "NSEW"))
+			{
+				map->player.x = row;
+				map->player.y = col;
+				map->starting_derection = map->cub[row][col];
+			}
+			col++;
+		}
+		row++;
+	}
 }

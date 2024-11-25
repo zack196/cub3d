@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/21 21:41:47 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:24:24 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 # include <limits.h>
 # include <math.h>
 # include <mlx.h>
-# include <unistd.h>
+
 # define NBR_FRAME 75
 # define EQUAL 0
+
 //****COLORS
 # define RESET	"\e[0m"
 # define RED 0x00FF0000
@@ -43,16 +44,14 @@
 # define WEST_TEXTURE "WE"
 
 # define MAP_SCALE 1.7
-#define STEP 15
-#define ROTATION_STEP 10
-#define MOUSSE_SENSITIVITY 0.006
-
-
+# define STEP 15
+# define ROTATION_STEP 10
+# define MOUSSE_SENSITIVITY 0.006
 
 typedef struct s_gdata
 {
-    void			*data;
-    struct s_gdata	*next;
+	void			*data;
+	struct s_gdata	*next;
 }	t_gdata;
 
 typedef struct s_color
@@ -93,13 +92,14 @@ typedef struct s_map
 	t_vector	player;
 }	t_map;
 
-typedef struct	s_image {
+typedef struct s_image
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_image;
+}	t_image;
 
 typedef struct s_player
 {
@@ -127,9 +127,9 @@ typedef struct s_texture
 	int		width;
 	int		height;
 	int		bits_per_pixel;
-	int		line_length; 
+	int		line_length;
 	int		endian;
-} 		t_texture;
+}	t_texture;
 
 typedef struct s_sprite
 {
@@ -140,127 +140,102 @@ typedef struct s_sprite
 	int			y;
 	int			curent_frame;
 	int			stop_animation;
-}		t_sprite;
-
-
-
+}	t_sprite;
 
 typedef struct s_data
 {
-	//mlx
 	void			*mlx;
 	void			*win_ptr;
 	t_image			image;
-	t_texture   	textures[5];
-	// door
+	t_texture		textures[5];
 	t_texture		door;
 	int				open_door;
-
-    int         	ac;
-    char        	**av;
+	int				ac;
+	char			**av;
 	int				win_height;
 	int				win_width;
-	//map
 	int				map_height;
 	int				map_width;
 	int				tile_size;
-	t_map	    	carte;
+	t_map			carte;
 	char			**map;
-	
-	//player data
 	t_player		*player;
-
-	//rays data
 	int				nbr_rays;
 	t_ray			*rays;
 	float			fov_angle;
-	
-	//colors
 	unsigned int	ceiling_color;
 	unsigned int	floor_color;
-	
-	//mini_map
 	int				mini_map_height;
 	int				mini_map_width;
 	int				mini_tile_size;
-
-	//sprite animation
-	t_sprite	sprite;
-	// mouse
-	int	mouse_active;
-	// t_vector	mousse;
+	t_sprite		sprite;
+	int				mouse_active;
 }	t_data;
 
-// *** parsing ***:
-int 	main(int ac, char **av);
-int		print_error(char *arg, char *str, int fd);
-int		ft_pars_file(char *arg);
-void	ft_pars_map(t_data *data);
-void	ft_find_content(t_data *data);
-// void	ft_spl_free(char **spl);
-void    ft_add_textures(t_data *data);
-void    ft_add_colors(t_data *data);
-int		ft_len_map(t_data  *data);
-int		ft_find_newline(char *str);
-int		ft_find_char(char x, char *str);
-void    ft_find_player_pos(t_map *map);
-int 	ft_pars_wall(char **cub, int row);
-int 	ft_surrond_wall(char **cub, int row, int col);
-int		ft_check_wall(char **cub, int row, int col);
-void    ft_last_pars_cub(t_map map);
-void	ft_check_cub(t_map map, int row, int col);
-void	ft_take_cub(t_data *data);
-void    ft_pars_cub(char **cub ,t_data *data);
-void	ft_init_game(t_data *data);
-void	ft_init_carte(t_map *map);
-void	init_color(t_color *color);
-int		ft_find_cub_(char *src, char *to_find);
+int				main(int ac, char **av);
+int				print_error(char *arg, char *str, int fd);
+int				ft_pars_file(char *arg);
+void			ft_pars_map(t_data *data);
+void			ft_find_content(t_data *data);
+void			ft_add_textures(t_data *data);
+void			ft_add_colors(t_data *data);
+int				ft_len_map(t_data *data);
+int				ft_find_newline(char *str);
+int				ft_find_char(char x, char *str);
+void			ft_find_player_pos(t_map *map);
+int				ft_pars_wall(char **cub, int row);
+int				ft_surrond_wall(char **cub, int row, int col);
+int				ft_check_wall(char **cub, int row, int col);
+void			ft_last_pars_cub(t_map map);
+void			ft_check_cub(t_map map, int row, int col);
+void			ft_take_cub(t_data *data);
+void			ft_pars_cub(char **cub, t_data *data);
+void			ft_init_game(t_data *data);
+void			ft_init_carte(t_map *map);
+void			init_color(t_color *color);
+int				ft_find_cub_(char *src, char *to_find);
 
-//mlx event
-int pres_bouton(int keycode, t_data *cub);
-int release_bouton(int keycode, t_data *cub);
+int				pres_bouton(int keycode, t_data *cub);
+int				release_bouton(int keycode, t_data *cub);
 
-//redring 
-void	render_walls(t_data *data);
-void		render_game(t_data *data);
-//utiles
-float	angle_normalize(float angle);
-int		is_wall(t_data *data, int x, int y);
-float	init_player_rotation(t_data *data);
-void 	draw_line(t_image *img, t_vector origine, t_vector end, int color);
-void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
-float	distance(t_vector a, t_float_vector b);
-int		mini_wall(t_data *data, int x, int y, int tile_size);
-//rays
-void	send_rays(t_data *data);
+void			render_walls(t_data *data);
+void			render_game(t_data *data);
 
+float			angle_normalize(float angle);
+int				is_wall(t_data *data, int x, int y);
+float			init_player_rotation(t_data *data);
+void			draw_line(t_image *img, t_vector origine,
+					t_vector end, int color);
+void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
+float			distance(t_vector a, t_float_vector b);
+int				mini_wall(t_data *data, int x, int y, int tile_size);
 
-long	now(void);
-int		clear_all(t_data *data);
-void	render_map(t_data *data);
+void			send_rays(t_data *data);
 
-//texters
-int		load_textures(t_data *data);
-// int     get_texture_color(t_data *data, t_ray *ray, int x, int y);
-void 	textured_wall(t_data *data, int x, int y, float wall_height);
+long			now(void);
+int				clear_all(t_data *data);
+void			render_map(t_data *data);
 
-//bonus 
-void	mini_map(t_data *data);
-int		load_sprite(t_data *data);
-int 	get_texture_color(t_texture *tex, int tex_x, int tex_y);
-void	init_sprite(t_data *data);
-int		pres_mousse(int button, int x, int y, t_data *data);
-void	mousse_render(t_data *data, int frame);
+int				load_textures(t_data *data);
+void			textured_wall(t_data *data, int x, int y, float wall_height);
 
-int 	render_sprite_animation(t_data *data);
-void	begin_animation(t_data *data);
-int 	is_door(t_data *data, int x, int y);
-int	mouse_move_hook(int x, int y, t_data *data);
+void			mini_map(t_data *data);
+int				load_sprite(t_data *data);
+int				get_texture_color(t_texture *tex, int tex_x, int tex_y);
+void			init_sprite(t_data *data);
+int				pres_mousse(int button, int x, int y, t_data *data);
+void			mousse_render(t_data *data, int frame);
 
+int				render_sprite_animation(t_data *data);
+void			begin_animation(t_data *data);
+int				is_door(t_data *data, int x, int y);
+int				mouse_move_hook(int x, int y, t_data *data);
 
 t_float_vector	horizontal_wall_hit_distace(t_ray *ray, t_data *data);
-t_float_vector   vertical_wall_hit_distance(t_ray *ray, t_data *data);
-float	distance(t_vector a, t_float_vector b);
-void	ray_facing(t_ray *ray);
-void	get_rays_values(t_data *data, t_ray *ray, t_float_vector vert, t_float_vector horz);
+t_float_vector	vertical_wall_hit_distance(t_ray *ray, t_data *data);
+float			distance(t_vector a, t_float_vector b);
+void			ray_facing(t_ray *ray);
+void			get_rays_values(t_data *data, t_ray *ray,
+					t_float_vector vert, t_float_vector horz);
+
 #endif
