@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:59:46 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/21 21:59:41 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:54:36 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ void	get_rays_values(t_data *data, t_ray *ray, t_float_vector vert
 		|| (ray->ray_facing_up && is_door(data, ray->hit_coord.x - 1
 				, ray->hit_coord.y))
 		|| (!ray->ray_facing_right && is_door(data, ray->hit_coord.x
-				, ray->hit_coord.y - 1))
-	)
+				, ray->hit_coord.y - 1)))
 		ray->is_door = 1;
 }
 

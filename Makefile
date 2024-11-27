@@ -81,13 +81,6 @@ $(BONUS): $(OBJ_BONUS)
 # 	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 
-# macos
-# %.o: %.c
-# 	$(CC) $(CFLAG) $(INC) -Imlx -c $< -o $@
-
-# $(NAME): $(OBJ)
-# 	$(CC) $(CFLAG) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
 clean:
 	@make clean -C $(LIBFT_DIR)
 	@rm -f $(OBJ_BONUS)

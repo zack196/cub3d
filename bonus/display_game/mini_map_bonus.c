@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:51:46 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/21 22:02:04 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:12:50 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	mini_map(t_data *data)
 			if (is_mini_wall(data, x, y) == 1)
 				my_mlx_pixel_put(&data->image, x, y, 0X696969);
 			else if (is_mini_wall(data, x, y) == 2)
-				my_mlx_pixel_put(&data->image, x, y, 0X007AFF);
+				my_mlx_pixel_put(&data->image, x, y, 0XFF7AFF);
 			else if (is_mini_wall(data, x, y) == 3)
 				my_mlx_pixel_put(&data->image, x, y, 0X587AF0);
 			else if (!(x % data->mini_tile_size) || !(y % data->mini_tile_size))
