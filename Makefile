@@ -1,7 +1,7 @@
 EXEC_DIR        =   src/parsing/
 INIT_DIR		=	src/init/
 RAY_CASTING		=	src/display_game/
-CFLAGS          =   -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS          =   -Wall -Wextra -Werror -fsanitize=address -g
 NAME            =   cub3d
 BONUS 			=	cub3d_bonus
 LIBFT_DIR       =   libft

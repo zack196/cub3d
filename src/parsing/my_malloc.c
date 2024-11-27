@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:10:54 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 16:09:55 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 09:55:45 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	*my_malloc(size_t size, int free_mode)
 	{
 		new = malloc(sizeof(t_gdata));
 		if (!new)
-			return (destroy(&g_data), NULL);
+			return (destroy(&g_data), exit(1), NULL);
 		new->data = malloc(size);
 		if (!new->data)
-			return (destroy(&g_data), NULL);
+			return (destroy(&g_data), exit(1), NULL);
 		new->next = g_data;
 		g_data = new;
 		return (new->data);
