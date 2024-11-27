@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:42:45 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/27 08:30:17 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:51:40 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	init_game(t_data *data)
 	data->player->player_rotation = init_player_rotation(data);
 	data->nbr_rays = data->win_width;
 	data->rays = my_malloc(sizeof (t_ray) * data->nbr_rays, 0);
-	if (!data->player)
-		return ((void)clear_all(data));
 	send_rays(data);
 }
 
