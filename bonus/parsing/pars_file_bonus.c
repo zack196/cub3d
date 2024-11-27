@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pars_file_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:20:18 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 17:17:00 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:57:55 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../cub3d_bonus.h"
 
 int	ft_find_cub_(char *src, char *to_find)
 {

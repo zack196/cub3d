@@ -6,22 +6,11 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:03:43 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 16:33:17 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:50:46 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
-// char	**ft_check(char **str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 		free(str[i++]);
-// 	free(str);
-// 	return (NULL);
-// }
 
 size_t	ft_countworld(char const *str, char c)
 {
@@ -60,10 +49,6 @@ char	*ft_world(char const *str, char c)
 	size_t	i;
 
 	dst = (char *)my_malloc((ft_len(str, c) + 1) * sizeof(char), 0);
-	if (!dst)
-	{
-		return (NULL);
-	}
 	i = 0;
 	while (str[i] && str[i] != c)
 	{
@@ -84,16 +69,12 @@ char	**ft_normal_split(char *s, char c)
 		return (NULL);
 	j = ft_countworld(s, c);
 	dst = (char **)my_malloc((ft_countworld(s, c) + 1) * sizeof(char *), 0);
-	if (!dst)
-		return (NULL);
 	i = 0;
 	while (*s && i < j)
 	{
 		while (*s == c)
 			s++;
 		dst[i] = ft_world(s, c);
-		if (!dst[i])
-			return (my_free(),NULL);//ft_check(dst));
 		i++;
 		while (*s != c && *s)
 			s++;

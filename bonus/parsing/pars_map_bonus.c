@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pars_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:17:53 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 17:17:51 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:58:05 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../cub3d_bonus.h"
 
 static int	ft_get_number_line(char *av)
 {

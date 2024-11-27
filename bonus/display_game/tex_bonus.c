@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/21 21:47:34 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 08:34:43 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	load_textures(t_data *data)
 	data->textures[1].tex_name = data->carte.south_texture;
 	data->textures[2].tex_name = data->carte.east_texture;
 	data->textures[3].tex_name = data->carte.west_texture;
-	data->textures[4].tex_name = "textures/door_64.xpm";
+	data->textures[4].tex_name = "textures/door_texture.xpm";
 	i = -1;
 	while (++i < 5)
 	{

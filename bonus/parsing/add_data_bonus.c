@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_data_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:11:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 17:13:35 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:57:45 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	ft_add_textures(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 13:49:11 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:42:51 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:47:48 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start >= slen || len == 0)
 		return (ft_calloc(1, 1));
 	if (slen - start <= len)
-		len = slen - start; 
+		len = slen - start;
 	dst = my_malloc(len + 1, 0);
 	i = 0;
 	while (s[start] && i < len)

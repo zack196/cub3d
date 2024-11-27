@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/21 22:14:39 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 08:26:14 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ void	render_textured_wall(t_data *data, int x, int y, float wall_height)
 	int				tex_y;
 	t_texture		*tex;
 
-	if (data.rays[y].ray_facing_up && data.rays[y].is_hit_vertical)
+	if (data->rays[y].ray_facing_up && data->rays[y].is_hit_vertical)
 		tex = &data->textures[0];
-	else if (!data.rays[y].ray_facing_up && data.rays[y].is_hit_vertical)
+	else if (!data->rays[y].ray_facing_up && data->rays[y].is_hit_vertical)
 		tex = &data->textures[1];
-	else if (data.rays[y].ray_facing_right && !data.rays[y].is_hit_vertical)
+	else if (data->rays[y].ray_facing_right && !data->rays[y].is_hit_vertical)
 		tex = &data->textures[2];
 	else
 		tex = &data->textures[3];
-	if (data.rays[y].is_hit_vertical)
-		tex_y = (int)data.rays[y].hit_coord.y % data->tile_size;
+	if (data->rays[y].is_hit_vertical)
+		tex_y = (int)data->rays[y].hit_coord.y % data->tile_size;
 	else
-		tex_y = (int)data.rays[y].hit_coord.x % data->tile_size;
+		tex_y = (int)data->rays[y].hit_coord.x % data->tile_size;
 	if ((x - (data->win_height - wall_height) / 2) < 0)
 		x = (data->win_height - wall_height) / 2;
 	tex_x = (int)((x - (data->win_height - wall_height) / 2)

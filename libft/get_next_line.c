@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:45:25 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:43:07 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:47:23 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_add(char **str, int i)
 	char	*new;
 
 	new = ft_substr(*str, i, ft_strlen(*str + i));
-	// free(*str);
 	*str = NULL;
 	return (new);
 }
@@ -37,7 +36,7 @@ char	*ft_get_line(char **str, char **dst, char **buffer, int fd)
 	byt_read = read(fd, *buffer, BUFFER_SIZE);
 	while (byt_read >= 0)
 	{
-		(*buffer)[byt_read] = '\0'; 
+		(*buffer)[byt_read] = '\0';
 		*str = ft_strjoin(*str, *buffer);
 		nl = ft_index(*str);
 		if (nl != -1)

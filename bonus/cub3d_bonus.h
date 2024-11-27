@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:15:36 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 18:24:24 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 08:20:40 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "libft.h"
 # include <sys/time.h>
@@ -237,5 +237,6 @@ float			distance(t_vector a, t_float_vector b);
 void			ray_facing(t_ray *ray);
 void			get_rays_values(t_data *data, t_ray *ray,
 					t_float_vector vert, t_float_vector horz);
-
+void			init_game(t_data *data);
+void			init_mlx(t_data *data);
 #endif

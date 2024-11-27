@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:42:45 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/17 22:46:36 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:46:54 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	init_color(t_color *color)
 	color->green = -1;
 	color->blue = -1;
 }
+
 void	ft_init_carte(t_map *map)
 {
-	map->cub= NULL;
+	map->cub = NULL;
 	map->row = -1;
 	map->north_texture = NULL;
 	map->south_texture = NULL;
@@ -33,12 +34,12 @@ void	ft_init_carte(t_map *map)
 	map->player.x = 0;
 	map->player.y = 0;
 }
+
 void	ft_init_game(t_data *data)
 {
 	int	i;
 
 	ft_init_carte(&data->carte);
-	//mlx init
 	data->mlx = NULL;
 	data->win_ptr = NULL;
 	data->image.img = NULL;

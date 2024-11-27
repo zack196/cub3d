@@ -6,7 +6,7 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:58:18 by zel-oirg          #+#    #+#             */
-/*   Updated: 2024/11/21 22:15:22 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 08:22:39 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	render_walls(t_data *data)
 			if ((data->win_height - wall_height) / 2 > x)
 				my_mlx_pixel_put(&data->image, x, y, data->ceiling_color);
 			else if (x < (data->win_height + wall_height) / 2)
-				render_textured_wall(data, x, y, &data->rays[y], wall_height);
+				render_textured_wall(data, x, y, wall_height);
 			else
 				my_mlx_pixel_put(&data->image, x, y, data->floor_color);
 		}

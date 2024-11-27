@@ -6,22 +6,11 @@
 /*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:45:58 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/20 04:42:26 by zel-oirg         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:48:30 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
-// static char	**malloc_error(char **tab)
-// {
-// 	unsigned int	i;
-
-// 	i = 0;
-// 	while (tab[i])
-// 		free(tab[i++]);
-// 	free(tab);
-// 	return (NULL);
-// }
 
 int	is_saperator(char c, char *sap)
 {
@@ -108,7 +97,7 @@ char	**ft_split(char *str, char *sap)
 				break ;
 		arr_str[w_i] = ft_strdup_w(str, &i, sap);
 		if (!arr_str[w_i])
-			return (NULL);//malloc_error(arr_str));
+			return (NULL);
 		w_i++;
 	}
 	arr_str[words] = 0;

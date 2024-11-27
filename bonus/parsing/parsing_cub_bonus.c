@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_cub_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-band <hel-band@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-oirg <zel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:56:16 by hel-band          #+#    #+#             */
-/*   Updated: 2024/11/25 17:20:11 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:58:15 by zel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../cub3d_bonus.h"
 
 int	ft_arroud_player(char **cub, int row, int col, t_data *data)
 {
